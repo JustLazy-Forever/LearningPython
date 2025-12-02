@@ -8,5 +8,4 @@ print(x)
 txt = "Hello World!"
 if txt.endswith("!"):
 
-    print(txt.count("e")) 
-
+    print(txt.count("e"))

@@ -1,6 +1,6 @@
-''' Sets- unorderd, elements unreplaceable, duplication of elements not allowed'''
+"""Sets- unorderd, elements unreplaceable, duplication of elements not allowed"""
 
-mySet = {"banana", "apple","cherry"}
+mySet = {"banana", "apple", "cherry"}
 print("My first set", mySet)
 
 mySet.add("mango")
@@ -15,10 +15,10 @@ yourSet = set(("mango", "kiwi", "pineapple"))
 print("yourSet", yourSet)
 
 mySet.update(yourSet)
-print("mySet",mySet)
+print("mySet", mySet)
 
 mySet.symmetric_difference_update(yourSet)
-print("mySet",mySet)
+print("mySet", mySet)
 
 del yourSet
 
@@ -31,11 +31,10 @@ print("Ouptut set", outputSet)
 inputSet.add("joystick")
 print("added to inputSet", inputSet)
 
-hardwareSet = inputSet | outputSet      #only for sets
+hardwareSet = inputSet | outputSet  # only for sets
 print("Hardware Set", hardwareSet)
 
-#hardwareSet = inputSet.union(outputSet) (for any iterable)
-#print("Hardware Set", hardwareSet)
+# hardwareSet = inputSet.union(outputSet) (for any iterable)
+# print("Hardware Set", hardwareSet)
 
-'''Frozensets = sets but unchangeable like tuple(un-removable, un-update-able, un-replaceable) '''
-
+"""Frozensets = sets but unchangeable like tuple(un-removable, un-update-able, un-replaceable) """
