@@ -6,7 +6,7 @@ print(myList)
 if "Apple" in myList:
     print("'Apple' is in myList")
 
-if "Kiwi" not in myList:
+if "Kiwi" not in myList:    
     print("'Kiwi' is not in myList")
 
 myList.pop(0)
