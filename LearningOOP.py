@@ -16,6 +16,7 @@ class Person:
         print("Age : ", self.age)
         print("Sex : ", self.sex)
 
+# class Student(Person):
 
 person1 = Person()
 
