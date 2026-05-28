@@ -1,57 +1,106 @@
 import matplotlib.pyplot as plt
-import pandas as pd
 import numpy as np
 import sys
 
+TOLERABLE_ERROR = 10**-5
 
-def function(x):
+def func(x):
 	return x**2 - 5 * x + 5
 
-
-def main() -> None:
-	x = np.linspace(0, 10, 100)
-	y = function(x)
-
+def Plot(x, y):
 	plt.plot(x, y)
 	plt.title("Bisection Method")
 	plt.grid()
-	plt.xlabel("x ->")
-	plt.ylabel("f(x) ->")
+	plt.xlabel("x ------->")
+	plt.ylabel("f(x) ----->")
+	plt.show()
 
-	check = True
-	while check:
-		initGuess_1 = float(input("Enter the 1st initial guess "))
-		initGuess_2 = float(input("Enter the 2nd initial guess "))
+def print_iteration_table(rows) -> None:
+	columns = ["Iteration", "a", "b", "m", "f(a)", "f(m)", "Error"]
+	widths = {
+		"Iteration": len("Iteration"),
+		"a": len("a"),
+		"b": len("b"),
+		"m": len("m"),
+		"f(a)": len("f(a)"),
+		"f(m)": len("f(m)"),
+		"Error": len("Error"),
+	}
 
-		if function(initGuess_1) * function(initGuess_2) >= 0:
-			print("Error; the product of the functional value of inputs must be strictly less than 0")
-		else:
-			check = False
+	for row in rows:
+		widths["Iteration"] = max(widths["Iteration"], len(f"{row['Iteration']}"))
+		for key in ("a", "b", "m", "f(a)", "f(m)", "Error"):
+			widths[key] = max(widths[key], len(f"{row[key]:.6f}"))
 
-	TOLERABLE_ERROR = 10**-5
-	a = initGuess_1
-	b = initGuess_2
+	header = " | ".join(f"{column:>{widths[column]}}" for column in columns)
+	separator = "-+-".join("-" * widths[column] for column in columns)
+	print("\nIteration Table:\n")
+	print(header)
+	print(separator)
+	for row in rows:
+		print(
+			f"{row['Iteration']:>{widths['Iteration']}} | "
+			f"{row['a']:>{widths['a']}.6f} | "
+			f"{row['b']:>{widths['b']}.6f} | "
+			f"{row['m']:>{widths['m']}.6f} | "
+			f"{row['f(a)']:>{widths['f(a)']}.6f} | "
+			f"{row['f(m)']:>{widths['f(m)']}.6f} | "
+			f"{row['Error']:>{widths['Error']}.6f}"
+		)
 
-	i = 0
+def findRoot(a, b) -> list:
+	iterations = 0
+	rows = []
 	while True:
 		m = (a + b) / 2
-		func_a = function(a)
-		func_b = function(b)
-		func_m = function(m)
+		func_a = func(a)
+		func_m = func(m)
+		error = abs(b - a) / 2
+
+		rows.append({
+			"Iteration": iterations + 1,
+			"a": a,
+			"b": b,
+			"m": m,
+			"f(a)": func_a,
+			"f(m)": func_m,
+			"Error": error,
+		})
 
 		if func_m * func_a < 0:
 			b = m
 		else:
 			a = m
 
-		i += 1
+		iterations += 1
 		if abs(func_m) < TOLERABLE_ERROR:
-			print("Root Found")
-			break
+			print("\nRoot Found")
+			return [m, iterations, rows]
 
-	print(m)
-	print(f"Ran {i} iterations")
-	plt.show()
+def main() -> None:
+	x = np.linspace(0, 10, 100)
+	y = func(x)
+
+	# Plot(x,y)
+
+	check = True
+	while check:
+		initGuess_1, initGuess_2  = map(float, input("Enter initial guesses"
+		"(2 only; separate with spaces).=> ").split())
+		
+		if (func(initGuess_1) * func(initGuess_2) >= 0):
+			print("Error; the product of the functional value of inputs must be strictly less than 0.\n")
+		else:
+			check = False
+
+	a = initGuess_1
+	b = initGuess_2
+
+	root, iterations, rows = findRoot(a,b)
+	print_iteration_table(rows)
+
+	print(f"\nRoot: {root:.5f}.")
+	print(f"\nRan {iterations} iterations.")
 
 
 if __name__ == "__main__":
