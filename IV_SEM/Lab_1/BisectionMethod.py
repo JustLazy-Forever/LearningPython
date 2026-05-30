@@ -1,19 +1,7 @@
-import matplotlib.pyplot as plt
-import numpy as np
-import sys
-
 TOLERABLE_ERROR = 10**-5
 
 def func(x):
 	return x**2 - 5 * x + 5
-
-def Plot(x, y):
-	plt.plot(x, y)
-	plt.title("Bisection Method")
-	plt.grid()
-	plt.xlabel("x ------->")
-	plt.ylabel("f(x) ----->")
-	plt.show()
 
 def print_iteration_table(rows) -> None:
 	columns = ["Iteration", "a", "b", "m", "f(a)", "f(m)", "Error"]
@@ -74,15 +62,9 @@ def findRoot(a, b) -> list:
 
 		iterations += 1
 		if abs(func_m) < TOLERABLE_ERROR:
-			print("\nRoot Found")
 			return [m, iterations, rows]
 
 def main() -> None:
-	x = np.linspace(0, 10, 100)
-	y = func(x)
-
-	# Plot(x,y)
-
 	check = True
 	while check:
 		initGuess_1, initGuess_2  = map(float, input("Enter initial guesses"
@@ -99,7 +81,8 @@ def main() -> None:
 	root, iterations, rows = findRoot(a,b)
 	print_iteration_table(rows)
 
-	print(f"\nRoot: {root:.5f}.")
+	print("\nRoot Found");
+	print(f"\nRoot: {root:.5  f}.")
 	print(f"\nRan {iterations} iterations.")
 
 
