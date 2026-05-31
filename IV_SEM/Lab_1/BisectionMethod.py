@@ -27,6 +27,9 @@ def print_iteration_table(rows) -> None:
 
 	header = " | ".join(f"{column:>{widths[column]}}" for column in columns)
 	separator = "-+-".join("-" * widths[column] for column in columns)
+
+	print("\nBy		:- Darshan Shrestha")
+	print("Roll no.	:- KCE081BCT010")
 	print("\nIteration Table:\n")
 	print(header)
 	print(separator)
@@ -87,9 +90,15 @@ def main() -> None:
 	root, iterations, rows = findRoot(a,b)
 	print_iteration_table(rows)
 
-	print("\nRoot Found");
-	print(f"\nRoot: {root:.5f}.")
-	print(f"\nRan {iterations} iterations.")
+	root_line = f"Root: {root:.5f}"
+	iter_line = f"Ran {iterations} iterations"
+	content_width = max(len(root_line), len(iter_line))
+	border = "+" + "-" * (content_width + 2) + "+"
+	print()
+	print(border)
+	print(f"| {root_line.ljust(content_width)} |")
+	print(f"| {iter_line.ljust(content_width)} |")
+	print(border)
 
 
 if __name__ == "__main__":
