@@ -1,3 +1,8 @@
+'''
+		By 		:- Darshan Shrestha
+		Roll no.:- KCE081BCT010
+'''
+
 TOLERABLE_ERROR = 10**-5
 
 def func(x):
@@ -67,6 +72,7 @@ def findRoot(a, b) -> list:
 def main() -> None:
 	check = True
 	while check:
+		print("f(x) = x**2 - 5 * x + 5\n")
 		initGuess_1, initGuess_2  = map(float, input("Enter initial guesses"
 		"(2 only; separate with spaces).=> ").split())
 		
@@ -82,7 +88,7 @@ def main() -> None:
 	print_iteration_table(rows)
 
 	print("\nRoot Found");
-	print(f"\nRoot: {root:.5  f}.")
+	print(f"\nRoot: {root:.5f}.")
 	print(f"\nRan {iterations} iterations.")
 
 
