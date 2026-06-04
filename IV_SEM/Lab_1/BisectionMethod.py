@@ -2,11 +2,28 @@
 		By 		:- Darshan Shrestha
 		Roll no.:- KCE081BCT010
 '''
+import matplotlib.pyplot as plt
+import numpy as np
 
 TOLERABLE_ERROR = 10**-5
 
 def func(x):
 	return x**2 - 5 * x + 5
+
+
+def plotFunc():
+	x_values = np.linspace(0, 5, 200)
+	y_values = [func(x) for x in x_values]
+
+	plt.figure(figsize=(8, 4))
+	plt.plot(x_values, y_values, label="f(x) = x^2 - 5x + 5")
+	plt.axhline(0, color="black", linewidth=0.8)
+	plt.xlabel("x")
+	plt.ylabel("f(x)")
+	plt.title("Plot of f(x)")
+	plt.grid(True)
+	plt.legend()
+	plt.show()
 
 def print_iteration_table(rows) -> None:
 	columns = ["Iteration", "a", "b", "m", "f(a)", "f(m)", "Error"]
@@ -74,6 +91,7 @@ def findRoot(a, b) -> list:
 
 def main() -> None:
 	check = True
+	plotFunc();
 	while check:
 		print("f(x) = x**2 - 5 * x + 5\n")
 		initGuess_1, initGuess_2  = map(float, input("Enter initial guesses"
